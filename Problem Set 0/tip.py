@@ -1,18 +1,18 @@
+def parse_currency(s):
+    return float(s.strip().replace('$', '').replace(',', ''))
+
+def parse_percent(s):
+    s = s.strip()
+    if s.endswith('%'):
+        return float(s[:-1]) / 100.0
+    v = float(s)
+    return v if v <= 1 else v / 100.0
+
 def main():
-    dollars = dollars_to_float(input("How much was the meal? "))
-    percent = percent_to_float(input("What percentage would you like to tip? "))
-    tip = dollars * percent
-    print(f"Leave ${tip:.2f}")
+    bill = parse_currency(input("Bill: "))
+    tip_rate = parse_percent(input("Tip: "))
+    tip_amount = bill * tip_rate
+    print(f"Leave ${tip_amount:.2f}")
 
-
-def dollars_to_float(d):
-    d = d.replace("$", "")
-    d = float(d)
-    return d
-
-def percent_to_float(p):
-    p = p.replace("%", "")
-    p = float(p)
-    p = p/100
-    return p
-main()
+if __name__ == "__main__":
+    main()
